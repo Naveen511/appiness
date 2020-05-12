@@ -12,15 +12,15 @@ import Dashboard from './Dashboard/index';
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router history={history}> 
+    <Router history={history}>
       <Switch>
-        <Route exact path="/" component={App} /> 
-        <Route exact path="/login" component={Login} /> 
-        <Route exact path="/dashboard" component={Dashboard} /> 
+        <Route exact path='/' component={App} />
+        <Route exact path='/login' component={Login} />
+        <Route exact path='/dashboard' component={Dashboard} />
       </Switch>
-  </Router>
-</Provider>, 
-document.getElementById('root') 
+    </Router>
+  </Provider>,
+  document.getElementById('root')
 );
 
 // If you want your app to work offline and load faster, you can change

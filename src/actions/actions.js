@@ -1,5 +1,8 @@
-export const GET_USER_DETAILS = 'GET_USER_DETAILS';
+export const LOGIN_USER = 'LOGIN_USER';
+export const GET_CURRENT_USER = 'GET_CURRENT_USER';
 
-export function getusers(value) {
-    return { type: GET_USER_DETAILS, value }
+export const loginUser = (username) => {
+  return {
+    type: LOGIN_USER
   }
+};

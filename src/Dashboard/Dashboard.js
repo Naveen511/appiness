@@ -1,46 +1,49 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import history from '../history';
 
-class Dashboard extends React.Component {
-    constructor(props){
-        super(props);
-        this.state={ };
-    }
+const Dashboard = (props) => {
+  const user = useSelector((state) => state.main);
+  const data = useSelector((state) => state.main.userDetails);
 
-    render() {
-        return(
-            <>
-           <div className="chat">
-               <table className="table table-striped">
-                   <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Name</th>
-                            <th>Department</th>
-                            <th>Email</th>
-                            <th>DOJ</th>
-                            <th>Action</th>
-                        </tr>
-                   </thead>
-                   <tbody>
-                       {/* {
-                   list.map( (data, index) => {
-                    return (
-                        <tr key={index}>
-                            <td>{data.id}</td>
-                            <td>{data.name}</td>
-                            <td>{data.department}</td>
-                            <td>{data.email}</td>
-                            <td>{data.doj}</td>
-                            <button type="button" className="clear" onClick={this.remove.bind(this, data.id)} >Delete</button>
-                        </tr>
-                    )
-                   })} */}
-                   </tbody>
-               </table>
-            </div>
-            </>
-        )
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (!user.isLoggedIn) {
+        history.push('/');
     }
-}
+  }, [user.isLoggedIn]);
+
+  return (
+    <div className='chat'>
+      <h1>Hello {user.username}!</h1>
+      <button onClick={() => dispatch({ type: 'LOGOUT'})}>Logout</button>
+      <table className='table table-striped'>
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Gender</th>
+            <th>EMail</th>
+            <th>Phn No</th>
+          </tr>
+        </thead>
+        <tbody>
+          {data.map((item) => (
+            <tr>
+              <td>{item.id}</td>
+              <td>{item.name}</td>
+              <td>{item.age}</td>
+              <td>{item.gender}</td>
+              <td>{item.email}</td>
+              <td>{item.phoneNo}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+};
 
 export default Dashboard;

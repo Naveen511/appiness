@@ -1,85 +1,52 @@
-import React from 'react';
-import Dashboard from '../Dashboard/index';
-import { Link }  from 'react-router';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import history from '../history';
 
 import './LoginStyle.css';
 
-class LoginPage extends React.Component {
-    constructor(props){
-        super(props);
-        this.state={
-            username: '',
-            password: '',
-            userDetails: [],
-            errormessage: '',
-        };
+const LoginPage = (props) => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [errorMsg, setErrorMsg] = useState('');
+  const dispatch = useDispatch();
+  const users = useSelector((state) => state.main);
+
+  useEffect(() => {
+    if (users.isLoggedIn) {
+      history.push('/dashboard');
     }
+  }, [users.isLoggedIn]);
 
-   
-    /**
-     * Update the form values in the state and list of values
-     */
-    changeHandler = (event) => {
-        let nam = event.target.name;
-        let val = event.target.value;
-        let err = '';
-        this.setState({errormessage: err});
-        this.setState({[nam]: val});
-      }
-
-      /**
-       * On submitting the form
-       */
-      mySubmitHandler = (event) => {
-        event.preventDefault();
-        const { username, password, userDetails } = this.state;
-        if ( (username !== "") && (password !== "") ) {
-            document.getElementById("myForm").reset();
-            console.log('success');
-            history.push("/dashboard");
-            userDetails.push({
-                username,
-                password
-            })
-        } else {
-            alert("Please fill all the fields");
-        }
-      }
-
-    render() {
-        return(
-            <>
-            <div>
-            <form id="myForm" onSubmit={this.mySubmitHandler}>
-                    <input
-                        type='text'
-                        name='username'
-                        placeholder="User Name"
-                        onChange={this.changeHandler}
-                    />
-                    <input
-                        type='text'
-                        name='password'
-                        placeholder="Password"
-                        onChange={this.changeHandler}
-                    />
-                    <br/>
-                    <input type='submit' />
-                    {this.state.errormessage}
-                    </form>
-            </div>
-            </>
-        )
+  const loginHandler = (ev) => {
+    ev.preventDefault();
+    if (users.username === username && users.password === password) {
+      dispatch({type: 'LOGIN_USER'});
+    } else {
+      setErrorMsg('Invalid username or password');
     }
-}
+  };
 
-const mapStateToProps = state => ({
-    userDetails: state.main.userDetails,
-});
+  return (
+    <div>
+      <form id='myForm' onSubmit={loginHandler}>
+        <input
+          type='text'
+          name='username'
+          placeholder='User Name'
+          onChange={(ev) => setUsername(ev.target.value)}
+        />
+        <input
+          type='text'
+          name='password'
+          placeholder='Password'
+          onChange={(ev) => setPassword(ev.target.value)}
+        />
+        <br />
+        <input type='submit' />
+        <p>{errorMsg}</p>
+      </form>
+    </div>
+  );
+};
 
-export default connect(
-  mapStateToProps,
-)(LoginPage);
+export default LoginPage;

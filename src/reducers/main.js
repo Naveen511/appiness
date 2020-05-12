@@ -1,68 +1,74 @@
-import { GET_USER_DETAILS } from '../actions/actions';
-
 const initialState = {
-    username:"hruday@gmail.com",
-    password :'hruday123',
-    userDetails: {
-      user:[{
-      "id":1,
-      "name":"test1",
-      "age" : "11",
-      "gender":"male",
-      "email" : "test1@gmail.com",
-      "phoneNo" : "9415346313"
-      },
-      {
-      "id" : 2,
-      "name":"test2",
-      "age" : "12",
-      "gender":"male",
-      "email" : "test2@gmail.com",
-      "phoneNo" : "9415346314"
-      },
-      {
-      "id":3,
-      "name":"test3",
-      "age" : "13",
-      "gender":"male",
-      "email" : "test3@gmail.com",
-      "phoneNo" : "9415346315"
-      },
-      {
-      "id":4,
-      "name":"test4",
-      "age" : "14",
-      "gender":"male",
-      "email" : "test4@gmail.com",
-      "phoneNo" : "9415346316"
-      },
-      {
-      "id":5,
-      "name":"test5",
-      "age" : "15",
-      "gender":"male",
-      "email" : "test5@gmail.com",
-      "phoneNo" : "9415346317"
-      },
-      {
-      "id":6,
-      "name":"test6",
-      "age" : "16",
-      "gender":"male",
-      "email" : "test6@gmail.com",
-      "phoneNo" : "9415346318"
-      }
-     ]
-     },
-  };
-  
+  username: 'demo@example.com',
+  password: 'demouser',
+  isLoggedIn: false,
+  userDetails: [
+    {
+      id: 1,
+      name: 'test1',
+      age: '11',
+      gender: 'male',
+      email: 'test1@gmail.com',
+      phoneNo: '9415346313',
+    },
+    {
+      id: 2,
+      name: 'test2',
+      age: '12',
+      gender: 'male',
+      email: 'test2@gmail.com',
+      phoneNo: '9415346314',
+    },
+    {
+      id: 3,
+      name: 'test3',
+      age: '13',
+      gender: 'male',
+      email: 'test3@gmail.com',
+      phoneNo: '9415346315',
+    },
+    {
+      id: 4,
+      name: 'test4',
+      age: '14',
+      gender: 'male',
+      email: 'test4@gmail.com',
+      phoneNo: '9415346316',
+    },
+    {
+      id: 5,
+      name: 'test5',
+      age: '15',
+      gender: 'male',
+      email: 'test5@gmail.com',
+      phoneNo: '9415346317',
+    },
+    {
+      id: 6,
+      name: 'test6',
+      age: '16',
+      gender: 'male',
+      email: 'test6@gmail.com',
+      phoneNo: '9415346318',
+    },
+  ],
+};
 
 export default function getUser(state = initialState, action) {
-    switch (action.type) {
-      case GET_USER_DETAILS:
-        return 
-      default:
-        return state
+  switch (action.type) {
+    case 'LOGIN_USER': {
+      return {
+        ...state,
+        isLoggedIn: true
+      }
     }
+    case 'LOGOUT': {
+      return {
+        ...state,
+        isLoggedIn: false
+      }
+    }
+    default:
+      return state;
   }
-
+}
