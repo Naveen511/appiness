@@ -1,6 +1,6 @@
 const initialState = {
-  username: 'demo@example.com',
-  password: 'demouser',
+  username: 'hruday@gmail.com',
+  password: 'hruday123',
   isLoggedIn: false,
   userDetails: [
     {
@@ -54,6 +54,11 @@ const initialState = {
   ],
 };
 
+/**
+ * function update the state
+ * @param  state 
+ * @param  action 
+ */
 export default function getUser(state = initialState, action) {
   switch (action.type) {
     case 'LOGIN_USER': {

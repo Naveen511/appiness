@@ -11,12 +11,14 @@ const LoginPage = (props) => {
   const dispatch = useDispatch();
   const users = useSelector((state) => state.main);
 
+  // Update the user login details
   useEffect(() => {
     if (users.isLoggedIn) {
       history.push('/dashboard');
     }
   }, [users.isLoggedIn]);
 
+  // Checks the validation and throws error
   const loginHandler = (ev) => {
     ev.preventDefault();
     if (users.username === username && users.password === password) {
@@ -27,7 +29,7 @@ const LoginPage = (props) => {
   };
 
   return (
-    <div>
+    <div style={{marginLeft: '300px', marginTop:'200px',paddingLft: '100px'}}>
       <form id='myForm' onSubmit={loginHandler}>
         <input
           type='text'
@@ -35,6 +37,7 @@ const LoginPage = (props) => {
           placeholder='User Name'
           onChange={(ev) => setUsername(ev.target.value)}
         />
+        <br />
         <input
           type='text'
           name='password'

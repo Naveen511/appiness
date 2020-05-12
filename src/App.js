@@ -10,6 +10,9 @@ class App extends React.Component {
     this.gotoLogin = this.gotoLogin.bind(this);
   }
 
+  /**
+   * Onclicking the login button the function executes
+   */
   gotoLogin() {
     history.push('/login');
   }

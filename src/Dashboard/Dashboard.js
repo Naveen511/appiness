@@ -2,6 +2,8 @@ import React, {useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import history from '../history';
 
+import './DashboardStyle.css';
+
 const Dashboard = (props) => {
   const user = useSelector((state) => state.main);
   const data = useSelector((state) => state.main.userDetails);
@@ -17,8 +19,17 @@ const Dashboard = (props) => {
   return (
     <div className='chat'>
       <h1>Hello {user.username}!</h1>
-      <button onClick={() => dispatch({ type: 'LOGOUT'})}>Logout</button>
-      <table className='table table-striped'>
+      <button  style={{
+            backgroundColor: 'red',
+            color: 'white',
+            padding: '12px 20px',
+            border: 'none',
+            borderRadius: '4px',
+            cursor: 'pointer',
+            marginTop: '20px',
+          }}
+      onClick={() => dispatch({ type: 'LOGOUT'})}>Logout</button>
+      <table className='table table-striped' id="customers">
         <thead>
           <tr>
             <th>Id</th>
